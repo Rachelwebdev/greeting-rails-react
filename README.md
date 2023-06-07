@@ -134,6 +134,10 @@ To run tests, run the following command:
 Example command:
 
 ```sh
+npm run build or yarn build
+```
+
+```sh
   bin/rails rspec
 ```
 
