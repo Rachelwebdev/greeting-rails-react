@@ -1,0 +1,40 @@
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+
+const url = 'http://localhost:5000/api/greetings';
+
+const initialState = {
+  greetings: [],
+  isLoading: true,
+};
+
+export const getGreetings = createAsyncThunk(
+  'greetings/getGreetings',
+  async () => {
+    const response = await fetch(url);
+    const data = await response.json();
+    console.log(data);
+    return data;
+  }
+);
+
+const greetingsSlice = createSlice({
+  name: 'greetings',
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(getGreetings.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getGreetings.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.greetings = action.payload;
+        //   console.log(action.payload);
+      })
+      .addCase(getGreetings.rejected, (state) => {
+        state.isLoading = false;
+      });
+  },
+});
+
+export default greetingsSlice.reducer;
