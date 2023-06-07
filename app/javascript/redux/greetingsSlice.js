@@ -29,7 +29,6 @@ const greetingsSlice = createSlice({
       .addCase(getGreetings.fulfilled, (state, action) => {
         state.isLoading = false;
         state.greetings = action.payload;
-        //   console.log(action.payload);
       })
       .addCase(getGreetings.rejected, (state) => {
         state.isLoading = false;
